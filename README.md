@@ -1,4 +1,5 @@
 # Project Progress KPI Dashboard
+![Power BI Dashboard](powerbi-dashboard.png)
 
 ## Overview
 
