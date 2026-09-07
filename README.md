@@ -1,55 +1,65 @@
 # Project Progress KPI Dashboard
-![Power BI Dashboard](powerbi-dashboard.png)
 
-## Overview
+**Supporting project · Excel + Power BI · Data → KPI Visibility**
 
-An end-to-end project progress reporting solution built in both Excel and Power BI. The dashboard helps project managers compare planned versus actual progress, monitor activity status, and identify delayed work.
+Turns a 20-activity project tracker into a view of planned versus actual progress, activity status, and discipline-level schedule gaps.
+
+**Demonstrated finding:** average actual progress is **38.25%** against **52.5%** planned, a **14.25 percentage-point shortfall**.
+
+[Open the Excel workbook](Project_Progress_KPI_Dashboard.xlsx) · [Open the Power BI report](Project_Progress_KPI_Dashboard_PowerBI.pbix)
+
+![Project progress dashboard showing planned versus actual progress and activity status](powerbi-dashboard.png)
 
 ## Business Problem
 
-Project teams need a clear, consolidated view of schedule performance and progress. Raw activity trackers make it difficult to identify where execution is behind plan and which disciplines need attention.
+Project teams need a consolidated view of execution against plan. A row-by-row tracker makes it harder to see which disciplines are behind and where follow-up is needed.
 
 ## Solution
 
-Built a dashboard using a 20-activity project tracker with planned and actual dates, progress percentages, disciplines, teams, and activity status.
+Excel Power Query prepares the tracker for formulas, PivotTables, and PivotCharts. Power BI presents KPI cards, planned/actual comparisons, activity status, and an interactive discipline slicer.
 
-## Tools Used
+## Data
 
-- Excel
-- Power Query
-- Excel formulas
-- PivotTables and PivotCharts
-- Power BI Desktop
-- DAX measures
-- Interactive slicers
+The workbook contains 20 activity records with discipline, responsible team, planned and actual dates, progress percentages, and status. Its `Raw_Data` and `qry_ProjectProgress_Clean` sheets make the inputs and transformations inspectable.
 
-## Key Metrics
+The records are **synthetic/demo data**, as confirmed by the project author. Results demonstrate the reporting approach and are not employer or client outcomes.
 
-- Total Activities: 20
-- Completed Activities: 2
-- In Progress: 7
-- Completed Late: 2
-- Average Planned Progress: 52.5%
-- Average Actual Progress: 38.25%
-- Average Progress Variance: -14.25 percentage points
+## Analysis and Decision Support
 
-## Key Insights
+| Measure | Saved result |
+|---|---:|
+| Total activities | 20 |
+| Completed / In Progress / Delayed / Not Started | 2 / 7 / 3 / 8 |
+| Average planned progress | 52.5% |
+| Average actual progress | 38.25% |
+| Average progress variance | −14.25 percentage points |
 
-- Actual project progress is 14.25 percentage points behind the planned average.
-- Several disciplines show a material gap between planned and actual progress.
-- Most activities are either in progress or not started, requiring close monitoring and prioritization.
-- The dashboard supports faster identification of delayed work and discipline-level performance issues.
+Managers can compare discipline-level gaps, review delayed activities, and focus recovery discussions on work behind plan. These progress percentages are simple activity averages, not effort- or cost-weighted project completion.
 
-## Dashboard Features
+## Automated Action
 
-- KPI cards for project scope, completion, late work, actual progress, and variance
-- Planned vs. actual progress comparison by discipline
-- Activity status distribution chart
-- Interactive discipline slicer in Power BI
-- Cleaned and transformed source data using Power Query
+Power Query, formulas, and PivotTables support repeatable preparation and summary reporting when refreshed. The project demonstrates reporting visibility; automated escalation or task updates are not implemented.
 
-## Files
+## Measured / Demonstrated Outcome
 
-- `Project_Progress_KPI_Dashboard.xlsx` — Excel dashboard and project summary
-- `Project_Progress_KPI_Dashboard_PowerBI.pbix` — Interactive Power BI dashboard
-- `powerbi-dashboard.png` — Power BI dashboard screenshot
+The saved analysis exposes the 14.25 percentage-point planned/actual gap. It does not measure a subsequent improvement in delivery.
+
+**Interpretation note:** the saved dashboard's “Completed Late” value of 2 counts records with an actual finish after the planned finish. One of those records remains marked Delayed with 90% progress in the source. Read this as a date-based late-finish count, not two status-confirmed completed-late activities.
+
+## Tools and Outputs
+
+Excel, Power Query, Excel formulas, PivotTables/PivotCharts, Power BI Desktop, DAX, and interactive slicers.
+
+The [Excel workbook](Project_Progress_KPI_Dashboard.xlsx) includes raw data, cleaned data, pivot analysis, a dashboard, and a project summary. The [Power BI file](Project_Progress_KPI_Dashboard_PowerBI.pbix) provides the interactive report; the [screenshot](powerbi-dashboard.png) provides a quick preview.
+
+## How to Run
+
+1. Download the repository. Open the Excel workbook and start with `Dashboard` or `Project_Summary`.
+2. Inspect `Raw_Data` and the Power Query steps before refreshing. Update any source path to your local copy if prompted, then refresh the queries and PivotTables.
+3. Open the `.pbix` file in Power BI Desktop. Update its source connection to your local workbook if needed and refresh. Use the discipline slicer to explore the saved report.
+
+This project provides the KPI visibility foundation for the later SQL analysis and reporting automation projects in the portfolio.
+
+---
+
+[Portfolio overview](https://github.com/23-06109#selected-projects) · [LinkedIn](https://www.linkedin.com/in/jimmyjrmanalon)
