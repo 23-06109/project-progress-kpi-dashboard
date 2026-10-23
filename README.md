@@ -1,28 +1,32 @@
 # Project Progress KPI Dashboard
 
-**Supporting project · Excel + Power BI · Data → KPI Visibility**
+A row-by-row activity tracker is hard to scan when you need planned progress, actual progress, and late work in one view. Discipline gaps stay buried in the sheet.
 
-Turns a 20-activity project tracker into a view of planned versus actual progress, activity status, and discipline-level schedule gaps.
+This sample turns that tracker into an Excel dashboard and a Power BI report. Refresh the workbook and the summary rebuilds from the activity table.
 
-**Demonstrated finding:** average actual progress is **38.25%** against **52.5%** planned, a **14.25 percentage-point shortfall**.
+## What you'd get
 
-[Open the Excel workbook](Project_Progress_KPI_Dashboard.xlsx) · [Open the Power BI report](Project_Progress_KPI_Dashboard_PowerBI.pbix)
+- [Excel workbook](Project_Progress_KPI_Dashboard.xlsx): the 20-activity table, a Power Query result with delay, variance, and status columns, pivot summaries, charts, a dashboard, and a project summary sheet
+- [Power BI report](Project_Progress_KPI_Dashboard_PowerBI.pbix): KPI cards, planned versus actual progress by discipline, an activity status chart, and a discipline slicer
+- [Screenshot](powerbi-dashboard.png) of the Power BI report
+
+All data in this repo is synthetic demo/sample data, not client work.
 
 ![Project progress dashboard showing planned versus actual progress and activity status](powerbi-dashboard.png)
 
 ## Business Problem
 
-Project teams need a consolidated view of execution against plan. A row-by-row tracker makes it harder to see which disciplines are behind and where follow-up is needed.
+Project teams need one view of execution against the plan. A row-by-row tracker makes it harder to see which disciplines are behind and which activities need follow-up.
 
 ## Solution
 
-Excel Power Query prepares the tracker for formulas, PivotTables, and PivotCharts. Power BI presents KPI cards, planned/actual comparisons, activity status, and an interactive discipline slicer.
+Excel Power Query reads the `tbl_ProjectProgress` table in this workbook. It adds delay days, progress variance, a performance status, and a schedule status. Formulas, PivotTables, and PivotCharts feed the `Dashboard` sheet. Power BI shows KPI cards, a planned versus actual column chart, an activity status chart, and a discipline slicer.
 
 ## Data
 
-The workbook contains 20 activity records with discipline, responsible team, planned and actual dates, progress percentages, and status. Its `Raw_Data` and `qry_ProjectProgress_Clean` sheets make the inputs and transformations inspectable.
+The workbook contains 20 activity records with discipline, responsible team, planned and actual dates, progress percentages, and status. `Raw_Data` holds the source table. `qry_ProjectProgress_Clean` holds the query result, so the inputs and the added columns can be checked.
 
-The records are **synthetic/demo data**, as confirmed by the project author. Results demonstrate the reporting approach and are not employer or client outcomes.
+All data in this repo is synthetic demo/sample data, not client work. The saved figures show the reporting approach on this sample.
 
 ## Analysis and Decision Support
 
@@ -32,34 +36,36 @@ The records are **synthetic/demo data**, as confirmed by the project author. Res
 | Completed / In Progress / Delayed / Not Started | 2 / 7 / 3 / 8 |
 | Average planned progress | 52.5% |
 | Average actual progress | 38.25% |
-| Average progress variance | −14.25 percentage points |
+| Average progress variance | -14.25 percentage points |
 
-Managers can compare discipline-level gaps, review delayed activities, and focus recovery discussions on work behind plan. These progress percentages are simple activity averages, not effort- or cost-weighted project completion.
+These progress percentages are simple averages of the 20 activities. They are not weighted by effort or cost.
+
+`Pivot_Analysis` shows the same planned and actual averages by discipline. `Pivot_Status` counts activities by status. Those views can support a review of delayed activities and of disciplines behind plan.
 
 ## Automated Action
 
-Power Query, formulas, and PivotTables support repeatable preparation and summary reporting when refreshed. The project demonstrates reporting visibility; automated escalation or task updates are not implemented.
+Refreshing the workbook rebuilds the query table, PivotTables, and charts from `tbl_ProjectProgress`. The project covers that reporting view. Alerting and task-list updates are outside this workbook.
 
 ## Measured / Demonstrated Outcome
 
-The saved analysis exposes the 14.25 percentage-point planned/actual gap. It does not measure a subsequent improvement in delivery.
+The saved Excel dashboard shows average actual progress of 38.25% against average planned progress of 52.5%, a gap of 14.25 percentage points. That is a snapshot of this sample. It does not measure a later change in delivery.
 
-**Interpretation note:** the saved dashboard's “Completed Late” value of 2 counts records with an actual finish after the planned finish. One of those records remains marked Delayed with 90% progress in the source. Read this as a date-based late-finish count, not two status-confirmed completed-late activities.
+**Interpretation note:** the Excel `Dashboard` label "Completed Late" is 2. The cell counts rows whose `Schedule_Status` is Delayed. In this saved table, both of those rows have an actual finish one day after the planned finish. One of them is still marked Delayed, with 90% actual progress. Read 2 as that date-based count, not two activities whose status is Completed.
 
 ## Tools and Outputs
 
-Excel, Power Query, Excel formulas, PivotTables/PivotCharts, Power BI Desktop, DAX, and interactive slicers.
+Excel, Power Query, formulas, PivotTables, PivotCharts, and Power BI Desktop (DAX measures, charts, and a discipline slicer).
 
-The [Excel workbook](Project_Progress_KPI_Dashboard.xlsx) includes raw data, cleaned data, pivot analysis, a dashboard, and a project summary. The [Power BI file](Project_Progress_KPI_Dashboard_PowerBI.pbix) provides the interactive report; the [screenshot](powerbi-dashboard.png) provides a quick preview.
+The [Excel workbook](Project_Progress_KPI_Dashboard.xlsx) includes `Raw_Data`, `qry_ProjectProgress_Clean`, `Dashboard`, `Pivot_Analysis`, `Pivot_Status`, and `Project_Summary`. The [Power BI file](Project_Progress_KPI_Dashboard_PowerBI.pbix) is the interactive report. The [screenshot](powerbi-dashboard.png) is a preview.
 
 ## How to Run
 
-1. Download the repository. Open the Excel workbook and start with `Dashboard` or `Project_Summary`.
-2. Inspect `Raw_Data` and the Power Query steps before refreshing. Update any source path to your local copy if prompted, then refresh the queries and PivotTables.
-3. Open the `.pbix` file in Power BI Desktop. Update its source connection to your local workbook if needed and refresh. Use the discipline slicer to explore the saved report.
+1. Download this repository. Open `Project_Progress_KPI_Dashboard.xlsx` and start with `Dashboard` or `Project_Summary`.
+2. The query `qry_ProjectProgress_Clean` reads `tbl_ProjectProgress` on the `Raw_Data` sheet in this same workbook. In Excel, refresh all data so the query, PivotTables, and charts rebuild.
+3. Open `Project_Progress_KPI_Dashboard_PowerBI.pbix` in Power BI Desktop. If Desktop asks for the workbook, select `Project_Progress_KPI_Dashboard.xlsx` from this folder, then refresh. Use the discipline slicer to filter the report.
 
-This project provides the KPI visibility foundation for the later SQL analysis and reporting automation projects in the portfolio.
+[Portfolio overview](https://github.com/23-06109#selected-projects)
 
----
+## Work with me
 
-[Portfolio overview](https://github.com/23-06109#selected-projects) · [LinkedIn](https://www.linkedin.com/in/jimmyjrmanalon)
+I offer a fixed-price, async Operations Reporting Automation Sprint: you send a messy Excel/CSV tracker, I send back a clean report that rebuilds on refresh, an overdue action list and a short how-to video. No meetings. Message me on LinkedIn: https://www.linkedin.com/in/jimmyjrmanalon/
